@@ -10,7 +10,7 @@ A UI library of timetable by NPC from National Taipei University of Technology.
 
 
 ## Download
-TimetableUI is available on [**jitpack.io**](https://jitpack.io/). See the full information [here](https://jitpack.io/#yaoandy107/TimetableUI/).
+TimetableUI is available on [**jitpack.io**](https://jitpack.io/). Click [here](https://jitpack.io/#yaoandy107/TimetableUI/) for more details.
 
 **Gradle dependency:**
 
@@ -76,7 +76,7 @@ courseTable.setOnCourseClickListener(new View.OnClickListener() {
 ```
 
 ### Add Initialize Listener
-If you want to execute code when layout finished initial.
+If you want to execute code after layout initialized.
 ```java
 courseTable.setTableInitializeListener(new CourseTableLayout.TableInitializeListener() {  
     @Override  
@@ -87,9 +87,9 @@ courseTable.setTableInitializeListener(new CourseTableLayout.TableInitializeList
 
 ```
 ### Customize Course Info
-By default, CourseInfo have two basis parameters which are name and times, so you don't have to implement by yourself.
+By default, CourseInfo have two basic parameters: name and times, you don't have to implement by yourself.
 
-If you want to have more info in CourseInfo, you can extends CourseInfo in our library and add some parameter yourself.
+If you want to contain more info in CourseInfo, you can extends CourseInfo from our library and add some parameter yourself.
 ```java
 public class CustomCourseInfo extends CourseInfo {  
     private String loaction;  
