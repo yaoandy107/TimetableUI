@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="darken">#333333</color>
+    <color name="cloud">#f9f9f9</color>
+    <color name="silver">#BDC3C7</color>
+
+    <array name="course_table">
+        <item>#ffccbc</item>
+        <item>#ffe0b2</item>
+        <item>#ffecb3</item>
+        <item>#fff9c4</item>
+        <item>#f0f4c3</item>
+        <item>#dcedc8</item>
+        <item>#c8e6c9</item>
+        <item>#b2dfdb</item>
+        <!--<item>#b2ebf2</item>-->
+        <item>#b3e5fc</item>
+        <item>#bbdefb</item>
+        <!--<item>#c5cae9</item>-->
+        <!--<item>#d1c4e9</item>-->
+        <item>#e1bee7</item>
+        <item>#f8bbd0</item>
+        <item>#ffcdd2</item>
+    </array>
+
+    <!--<array name="course_table＿50">-->
+    <!--<item>#fbe9e7</item>-->
+    <!--<item>#fff3e0</item>-->
+    <!--<item>#fff8e1</item>-->
+    <!--<item>#fffde7</item>-->
+    <!--<item>#f9fbe7</item>-->
+    <!--<item>#f1f8e9</item>-->
+    <!--<item>#e8f5e9</item>-->
+    <!--<item>#e0f2f1</item>-->
+    <!--<item>#e0f7fa</item>-->
+    <!--<item>#e1f5fe</item>-->
+    <!--<item>#e3f2fd</item>-->
+    <!--<item>#e8eaf6</item>-->
+    <!--<item>#ede7f6</item>-->
+    <!--<item>#f3e5f5</item>-->
+    <!--<item>#fce4ec</item>-->
+    <!--<item>#ffebee</item>-->
+    <!--</array>-->
+</resources>
