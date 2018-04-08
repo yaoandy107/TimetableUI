@@ -76,7 +76,7 @@ Set the course time in order of Monday to Sunday.
 For example, `courseInfo1` is at the first and second period on Monday, also the fourth on Wednesday.
 
 ### Add OnClickListner for course block
-If you want to add OnClickListner for course block
+If you want to add OnClickListner for course blocks, you just need to add the listener like:
 ```java
 courseTable.setOnCourseClickListener(new View.OnClickListener() {  
     @Override  
@@ -89,7 +89,7 @@ courseTable.setOnCourseClickListener(new View.OnClickListener() {
 ```
 
 ### Add Initialize Listener
-If you want to execute code when layout finished initial.
+If you want to execute some code when layout finished initial, you can do as the code below.
 ```java
 courseTable.setTableInitializeListener(new CourseTableLayout.TableInitializeListener() {  
     @Override  
@@ -102,7 +102,7 @@ courseTable.setTableInitializeListener(new CourseTableLayout.TableInitializeList
 ### Customize Course Info
 By default, CourseInfo have two basis parameters which are name and times, so you don't have to implement by yourself.
 
-If you want to have more info in CourseInfo, you can extends CourseInfo in our library and add some parameter yourself.
+If you want to have more parameter in CourseInfo, you can extends CourseInfo in our library and add some parameter yourself like the sample below.
 ```java
 public class CustomCourseInfo extends CourseInfo {  
     private String loaction;  
@@ -135,6 +135,9 @@ public class CustomCourseInfo extends CourseInfo {
 }
 
 ```
+### More sample
+You can download my repo to see some sample code I write.
+
 ## Contributing to the project
 ### Issues
 Feel free to submit issues requests.
