@@ -28,27 +28,58 @@ public class MainActivity extends AppCompatActivity {
         StudentCourse studentCourse = new StudentCourse();
         ArrayList<CourseInfo> courseInfoList = new ArrayList<>();
 
-        // 創建課程 - 範例 1
+        // Add course1 - sample1
         CustomCourseInfo customCourseInfo = new CustomCourseInfo();
-        customCourseInfo.setName("1號課程");
+        customCourseInfo.setName("Course 1");
         customCourseInfo.setCourseTime("1 2", "", "2", "3", "4", "", "");
-        customCourseInfo.setLoaction("Taiwan");
+        customCourseInfo.setLoaction("Taipei");
+        customCourseInfo.setId("01");
+        customCourseInfo.setTeacher("OuO");
         courseInfoList.add(customCourseInfo);
 
-        // 創建課程 - 範例 2
+        // Add course1 - sample2
         CustomCourseInfo customCourseInfo1 = new CustomCourseInfo();
-        customCourseInfo1.setName("2號課程");
+        customCourseInfo1.setName("Course 2");
         customCourseInfo1.setCourseTime(new String[]{"4", "5", "3", "6 7 8", "", "", ""});
         customCourseInfo1.setLoaction("Taiwan");
+        customCourseInfo1.setId("02");
+        customCourseInfo1.setTeacher("OωO");
         courseInfoList.add(customCourseInfo1);
 
-        // 設置課表
+        // Add course1 - sample3
+        CustomCourseInfo customCourseInfo2 = new CustomCourseInfo();
+        customCourseInfo2.setName("Course 3");
+        customCourseInfo2.setCourseTime("5 6", "3 4", "", "7 9", "", "", "");
+        customCourseInfo2.setLoaction("Kaohsiung");
+        customCourseInfo2.setId("03");
+        customCourseInfo2.setTeacher("OnO");
+        courseInfoList.add(customCourseInfo2);
+
+        // Add course1 - sample4
+        CustomCourseInfo customCourseInfo3 = new CustomCourseInfo();
+        customCourseInfo3.setName("Course 4");
+        customCourseInfo3.setCourseTime("", "1 2", "7 8", "", "5 6", "", "");
+        customCourseInfo3.setLoaction("Hualien");
+        customCourseInfo3.setId("04");
+        customCourseInfo3.setTeacher("OwO");
+        courseInfoList.add(customCourseInfo3);
+
+        // Add course1 - sample5
+        CustomCourseInfo customCourseInfo4 = new CustomCourseInfo();
+        customCourseInfo4.setName("Course 5");
+        customCourseInfo4.setCourseTime("7 8", "", "5 6", "1 2", "7 8", "", "");
+        customCourseInfo4.setLoaction("Taichung");
+        customCourseInfo4.setId("05");
+        customCourseInfo4.setTeacher("OAO");
+        courseInfoList.add(customCourseInfo4);
+
+        // Set timetable
         studentCourse.setCourseList(courseInfoList);
         courseTable.setStudentCourse(studentCourse);
         courseTable.setTableInitializeListener(new CourseTableLayout.TableInitializeListener() {
             @Override
             public void onTableInitialized(CourseTableLayout course_table) {
-                Toast.makeText(MainActivity.this, "課表初始化完成", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Finish intialized", Toast.LENGTH_SHORT).show();
             }
         });
         courseTable.setOnCourseClickListener(new View.OnClickListener() {
@@ -62,13 +93,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void showInfoDialog(int id, String courseName, CustomCourseInfo course) {
         String message = String.format(Locale.TAIWAN, "%s%s\n%s%s\n%s%s",
-                "課號：", course.getId(),
-                "地點：", course.getLoaction(),
-                "授課老師：", course.getTeacher());
+                "Course ID：", course.getId(),
+                "Location：", course.getLoaction(),
+                "Teacher：", course.getTeacher());
         AlertDialog.Builder courseDialogBuilder = new AlertDialog.Builder(this)
                 .setTitle(courseName)
                 .setMessage(message)
-                .setPositiveButton("詳細內容", null);
+                .setPositiveButton("Detail", null);
         courseDialogBuilder.show();
     }
 }
