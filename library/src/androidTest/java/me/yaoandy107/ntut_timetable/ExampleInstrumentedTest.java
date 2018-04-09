@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("me.yaoandy107.ntutschedul.test", appContext.getPackageName());
+        assertEquals("me.yaoandy107.ntut_timetable.test", appContext.getPackageName());
     }
 }
