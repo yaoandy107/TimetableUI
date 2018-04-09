@@ -211,7 +211,7 @@ public class CourseTableLayout extends LinearLayout {
                 ArrayList<String> s = splitTime(time);
                 for (String t : s) {
                     if (t.length() != 0) {
-                        int row = Integer.valueOf(t);
+                        int row = Integer.parseInt(t);
                         int col = i + 1;
                         isDisplayABCD = isDisplayABCD || row > 9;
                         isDisplaySun = isDisplaySun || i == 6;
