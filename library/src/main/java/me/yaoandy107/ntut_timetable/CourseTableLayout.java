@@ -281,14 +281,15 @@ public class CourseTableLayout extends LinearLayout {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {
-
+            public void onAnimationEnd(Animation animation) {
+                // nothing to do
             }
 
             @Override
-            public void onAnimationEnd(Animation animation) {
-
+            public void onAnimationRepeat(Animation animation) {
+                // nothing to do
             }
+
         });
         translateAnimation.setInterpolator(new OvershootInterpolator());
         new Handler().postDelayed(new Runnable() {
