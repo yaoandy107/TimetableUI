@@ -1,4 +1,5 @@
 # TimetableUI
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0cd4629f22eb4687a0c4f8b692d44fb0)](https://app.codacy.com/app/yaoandy107/TimetableUI?utm_source=github.com&utm_medium=referral&utm_content=yaoandy107/TimetableUI&utm_campaign=badger)
 [![](https://jitpack.io/v/yaoandy107/TimetableUI.svg)](https://jitpack.io/#yaoandy107/TimetableUI)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4fdb1a5c50d24425af64e6dd9805204d)](https://www.codacy.com/app/yaoandy107/TimetableUI?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yaoandy107/TimetableUI&amp;utm_campaign=Badge_Grade)
