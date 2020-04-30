@@ -12,11 +12,9 @@ import android.view.Gravity;
  */
 
 public class CourseBlock extends AppCompatTextView {
-    private Context context;
 
     public CourseBlock(Context context) {
         super(context);
-        this.context = context;
         setTextColor(Color.BLACK);
         setGravity(Gravity.CENTER);
         setPadding(2, 0, 2, 0);
