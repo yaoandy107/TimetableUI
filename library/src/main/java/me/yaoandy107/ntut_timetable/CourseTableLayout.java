@@ -202,7 +202,7 @@ public class CourseTableLayout extends LinearLayout {
     public void showCourse(StudentCourse studentCourse) {
         resetCourseTable();
         int color_index = 0;
-        int[] color_array = getColorArray(studentCourse.getCourseList().size(), studentCourse.getColors());
+        int[] color_array = getColorArray(studentCourse.getCourseList());
         int count = 0;
         for (CourseInfo item : studentCourse.getCourseList()) {
             boolean isHaveTime = false;
@@ -235,34 +235,31 @@ public class CourseTableLayout extends LinearLayout {
         this.studentCourse = studentCourse;
     }
 
-    private int[] getColorArray(int color_count, int[] colorArray) {
-        if (colorArray == null) {
-            colorArray = new int[color_count];
-            int[] ints = getContext().getResources().getIntArray(R.array.course_table);
-            List<Integer> defaoultColor = new ArrayList<>();
-            for (int i : ints) {
-                defaoultColor.add(i);
-            }
-            for (int i = 0; i < color_count; i++) {
-                int random = (int) (Math.random() * defaoultColor.size());
-                colorArray[i] = defaoultColor.remove(random);
-            }
-            return colorArray;
-        } else {
-            if (colorArray.length < color_count) {
-                int[] randomColor = getColorArray(color_count - colorArray.length, null);
+    private int[] getColorArray(List<CourseInfo> courses) {
+        ArrayList<Integer> colors = new ArrayList<>();
 
-                int[] colors = new int[color_count];
-                for (int i = 0; i < colors.length; i++) {
-                    if (i < colorArray.length)
-                        colors[i] = colorArray[i];
-                    else
-                        colors[i] = randomColor[i - colorArray.length + 1];
-                }
-                return colors;
-            } else
-                return colorArray;
+        int[] ints = getContext().getResources().getIntArray(R.array.course_table);
+        List<Integer> defaultColor = new ArrayList<>();
+        for (int i : ints) {
+            defaultColor.add(i);
         }
+
+        for (int i = 0; i < courses.size(); i++) {
+            if (courses.get(i).getColor() == null) {
+                int random = (int) (Math.random() * defaultColor.size());
+                colors.add(defaultColor.get(random));
+                defaultColor.remove(random);
+            } else {
+                colors.add(courses.get(i).getColor());
+            }
+        }
+
+        int[] colorsArray = new int[colors.size()];
+        for (int i = 0; i < colors.size(); i++) {
+            colorsArray[i] = colors.get(i);
+        }
+
+        return colorsArray;
     }
 
     private void setTableCell(int row, int col, int color, CourseInfo course) {

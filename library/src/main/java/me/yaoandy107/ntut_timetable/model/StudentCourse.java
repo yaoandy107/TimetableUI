@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class StudentCourse {
     private ArrayList<CourseInfo> courseList = null;
-    private int[] colors = null;
 
     public ArrayList<CourseInfo> getCourseList() {
         return courseList;
@@ -16,13 +15,5 @@ public class StudentCourse {
 
     public void setCourseList(ArrayList<CourseInfo> courseList) {
         this.courseList = courseList;
-    }
-
-    public void setColors(int[] colors) {
-        this.colors = colors;
-    }
-
-    public int[] getColors() {
-        return colors;
     }
 }
