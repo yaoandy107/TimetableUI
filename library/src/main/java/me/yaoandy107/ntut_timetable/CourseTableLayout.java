@@ -42,6 +42,8 @@ public class CourseTableLayout extends LinearLayout {
     private StudentCourse studentCourse = new StudentCourse();
     private OnTouchListener onTouchListener;
 
+    private int[] colorArray = null;
+
     public CourseTableLayout(Context context) {
         super(context);
         inflate(context, R.layout.course_table_layout, this);
@@ -235,18 +237,41 @@ public class CourseTableLayout extends LinearLayout {
         this.studentCourse = studentCourse;
     }
 
+    public void setColorArray(int[] colorArray) {
+        this.colorArray = colorArray;
+    }
+
     private int[] getColorArray(int color_count) {
-        int[] colorArray = new int[color_count];
-        int[] ints = getContext().getResources().getIntArray(R.array.course_table);
-        List<Integer> defaoultColor = new ArrayList<>();
-        for (int i : ints) {
-            defaoultColor.add(i);
+        if (colorArray == null) {
+            int[] colorArray = new int[color_count];
+            int[] ints = getContext().getResources().getIntArray(R.array.course_table);
+            List<Integer> defaoultColor = new ArrayList<>();
+            for (int i : ints) {
+                defaoultColor.add(i);
+            }
+            for (int i = 0; i < color_count; i++) {
+                int random = (int) (Math.random() * defaoultColor.size());
+                colorArray[i] = defaoultColor.remove(random);
+            }
+            return colorArray;
+        } else {
+            if (colorArray.length < color_count) {
+                int[] colArray = colorArray;
+                colorArray = null;
+                int[] randomColor = getColorArray(color_count - colArray.length);
+                colorArray = colArray;
+
+                int[] colors = new int[color_count];
+                for (int i = 0; i < colors.length; i++) {
+                    if (i < colorArray.length)
+                        colors[i] = colorArray[i];
+                    else
+                        colors[i] = randomColor[i - colorArray.length + 1];
+                }
+                return colors;
+            } else
+                return colorArray;
         }
-        for (int i = 0; i < color_count; i++) {
-            int random = (int) (Math.random() * defaoultColor.size());
-            colorArray[i] = defaoultColor.remove(random);
-        }
-        return colorArray;
     }
 
     private void setTableCell(int row, int col, int color, CourseInfo course) {
