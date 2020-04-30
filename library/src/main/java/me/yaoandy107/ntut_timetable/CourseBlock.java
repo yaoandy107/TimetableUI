@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.StateListDrawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.Gravity;
 
@@ -18,7 +17,7 @@ public class CourseBlock extends AppCompatTextView {
     public CourseBlock(Context context) {
         super(context);
         this.context = context;
-        setTextColor(ContextCompat.getColor(context, R.color.darken));
+        setTextColor(Color.BLACK);
         setGravity(Gravity.CENTER);
         setPadding(2, 0, 2, 0);
         setTextSize(12);
@@ -34,7 +33,7 @@ public class CourseBlock extends AppCompatTextView {
                 new int[]{android.R.attr.state_enabled}, new ColorDrawable(
                         color));
         setBackgroundDrawable(background_drawable);
-        setTextColor(pickTextColorBasedOnBgColorSimple(color, ContextCompat.getColor(context, R.color.cloud), ContextCompat.getColor(context, R.color.darken)));
+        setTextColor(pickTextColorBasedOnBgColorSimple(color, Color.WHITE, Color.BLACK));
     }
 
     public void resetBlock() {
