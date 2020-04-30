@@ -42,8 +42,6 @@ public class CourseTableLayout extends LinearLayout {
     private StudentCourse studentCourse = new StudentCourse();
     private OnTouchListener onTouchListener;
 
-    private int[] colorArray = null;
-
     public CourseTableLayout(Context context) {
         super(context);
         inflate(context, R.layout.course_table_layout, this);
@@ -204,7 +202,7 @@ public class CourseTableLayout extends LinearLayout {
     public void showCourse(StudentCourse studentCourse) {
         resetCourseTable();
         int color_index = 0;
-        int[] color_array = getColorArray(studentCourse.getCourseList().size());
+        int[] color_array = getColorArray(studentCourse.getCourseList().size(), studentCourse.getColors());
         int count = 0;
         for (CourseInfo item : studentCourse.getCourseList()) {
             boolean isHaveTime = false;
@@ -237,13 +235,9 @@ public class CourseTableLayout extends LinearLayout {
         this.studentCourse = studentCourse;
     }
 
-    public void setColorArray(int[] colorArray) {
-        this.colorArray = colorArray;
-    }
-
-    private int[] getColorArray(int color_count) {
+    private int[] getColorArray(int color_count, int[] colorArray) {
         if (colorArray == null) {
-            int[] colorArray = new int[color_count];
+            colorArray = new int[color_count];
             int[] ints = getContext().getResources().getIntArray(R.array.course_table);
             List<Integer> defaoultColor = new ArrayList<>();
             for (int i : ints) {
@@ -256,10 +250,7 @@ public class CourseTableLayout extends LinearLayout {
             return colorArray;
         } else {
             if (colorArray.length < color_count) {
-                int[] colArray = colorArray;
-                colorArray = null;
-                int[] randomColor = getColorArray(color_count - colArray.length);
-                colorArray = colArray;
+                int[] randomColor = getColorArray(color_count - colorArray.length, null);
 
                 int[] colors = new int[color_count];
                 for (int i = 0; i < colors.length; i++) {
