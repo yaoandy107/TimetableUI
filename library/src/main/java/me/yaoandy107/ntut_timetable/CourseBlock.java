@@ -13,8 +13,11 @@ import android.view.Gravity;
  */
 
 public class CourseBlock extends AppCompatTextView {
+    private Context context;
+
     public CourseBlock(Context context) {
         super(context);
+        this.context = context;
         setTextColor(ContextCompat.getColor(context, R.color.darken));
         setGravity(Gravity.CENTER);
         setPadding(2, 0, 2, 0);
@@ -31,6 +34,7 @@ public class CourseBlock extends AppCompatTextView {
                 new int[]{android.R.attr.state_enabled}, new ColorDrawable(
                         color));
         setBackgroundDrawable(background_drawable);
+        setTextColor(pickTextColorBasedOnBgColorSimple(color, ContextCompat.getColor(context, R.color.cloud), ContextCompat.getColor(context, R.color.darken)));
     }
 
     public void resetBlock() {
@@ -38,5 +42,15 @@ public class CourseBlock extends AppCompatTextView {
         setTag(null);
         super.setBackgroundColor(Color.TRANSPARENT);
         setOnClickListener(null);
+    }
+
+    public static int pickTextColorBasedOnBgColorSimple(int bgColor, int lightColor, int darkColor) {
+        String color = String.format("#%06X", (0xFFFFFF & bgColor));
+        color = color.substring(1, 7);
+        int r = Integer.parseInt(color.substring(0, 2), 16); // hexToR
+        int g = Integer.parseInt(color.substring(2, 4), 16); // hexToG
+        int b = Integer.parseInt(color.substring(4, 6), 16); // hexToB
+        return (((r * 0.299) + (g * 0.587) + (b * 0.114)) > 186) ?
+                darkColor : lightColor;
     }
 }
