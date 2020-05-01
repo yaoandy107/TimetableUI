@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         // Add course1 - sample2
         CustomCourseInfo customCourseInfo1 = new CustomCourseInfo();
         customCourseInfo1.setName("Course 2");
-        customCourseInfo1.setCourseTime(new String[]{"4", "5", "3", "6 7 8", "", "", ""});
+        customCourseInfo1.setCourseTime(new String[]{"4", "5", "3", "6 7 9", "", "", ""});
         customCourseInfo1.setLoaction("Taiwan");
         customCourseInfo1.setId("02");
         customCourseInfo1.setTeacher("OωO");

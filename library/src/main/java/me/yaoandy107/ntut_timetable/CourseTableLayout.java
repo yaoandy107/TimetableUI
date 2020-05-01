@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import me.yaoandy107.ntut_timetable.model.CourseInfo;
 import me.yaoandy107.ntut_timetable.model.StudentCourse;
@@ -41,6 +40,7 @@ public class CourseTableLayout extends LinearLayout {
     private LinearLayout courseContainer;
     private StudentCourse studentCourse = new StudentCourse();
     private OnTouchListener onTouchListener;
+    private String[] header = new String[]{"一", "二", "三", "四", "五", "六", "日"};
 
     public CourseTableLayout(Context context) {
         super(context);
@@ -123,13 +123,11 @@ public class CourseTableLayout extends LinearLayout {
             tableRow.setOrientation(LinearLayout.HORIZONTAL);
             tableRow.setLayoutParams(i == 0 ? title_row_params : row_params);
             tableRow.setGravity(Gravity.CENTER);
-            tableRow.setBackgroundResource(i % 2 != 0 ? R.color.cloud
-                    : R.color.white);
+            tableRow.setBackgroundResource(i % 2 != 0 ? R.color.cloud : R.color.white);
             for (int j = 0; j < TABLE_COL; j++) {
                 CourseBlock tableCell = new CourseBlock(getContext());
                 if (j == 0 && i > 0) {
-                    tableCell.setText(Integer.toHexString(i).toUpperCase(
-                            Locale.US));
+                    tableCell.setText(i + "");
                 }
                 tableCell.setId(j != TABLE_COL - 1 ? i : 14);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -147,19 +145,19 @@ public class CourseTableLayout extends LinearLayout {
         }
         LinearLayout titleRow = (LinearLayout) courseContainer.getChildAt(0);
         CourseBlock text = (CourseBlock) titleRow.getChildAt(1);
-        text.setText("一");
+        text.setText(header[0]);
         text = (CourseBlock) titleRow.getChildAt(2);
-        text.setText("二");
+        text.setText(header[1]);
         text = (CourseBlock) titleRow.getChildAt(3);
-        text.setText("三");
+        text.setText(header[2]);
         text = (CourseBlock) titleRow.getChildAt(4);
-        text.setText("四");
+        text.setText(header[3]);
         text = (CourseBlock) titleRow.getChildAt(5);
-        text.setText("五");
+        text.setText(header[4]);
         text = (CourseBlock) titleRow.getChildAt(6);
-        text.setText("六");
+        text.setText(header[5]);
         text = (CourseBlock) titleRow.getChildAt(7);
-        text.setText("日");
+        text.setText(header[6]);
     }
 
     private void resetCourseTable() {
@@ -326,5 +324,10 @@ public class CourseTableLayout extends LinearLayout {
 
     public interface TableInitializeListener {
         void onTableInitialized(CourseTableLayout course_table);
+    }
+
+    public void setHeader(String... header) {
+        if (header.length == 7)
+            this.header = header;
     }
 }
