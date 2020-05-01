@@ -18,7 +18,6 @@ public class CourseBlock extends AppCompatTextView {
         setTextColor(Color.BLACK);
         setGravity(Gravity.CENTER);
         setPadding(2, 0, 2, 0);
-        setTextSize(12);
     }
 
     @Override

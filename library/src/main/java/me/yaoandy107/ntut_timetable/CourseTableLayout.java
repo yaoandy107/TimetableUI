@@ -1,6 +1,7 @@
 package me.yaoandy107.ntut_timetable;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -41,6 +42,8 @@ public class CourseTableLayout extends LinearLayout {
     private StudentCourse studentCourse = new StudentCourse();
     private OnTouchListener onTouchListener;
     private String[] header = new String[]{"一", "二", "三", "四", "五", "六", "日"};
+    private int textSize = 12;
+    private int typeface = Typeface.NORMAL;
 
     public CourseTableLayout(Context context) {
         super(context);
@@ -268,6 +271,8 @@ public class CourseTableLayout extends LinearLayout {
             table_cell.setVisibility(View.INVISIBLE);
             table_cell.setText(course.getName().trim());
             table_cell.setTag(course);
+            table_cell.setTextSize(textSize);
+            table_cell.setTypeface(table_cell.getTypeface(), typeface);
             table_cell.setBackgroundColor(color);
             table_cell.setOnClickListener(onClickListener);
             setAnimation(table_cell);
@@ -329,5 +334,13 @@ public class CourseTableLayout extends LinearLayout {
     public void setHeader(String... header) {
         if (header.length == 7)
             this.header = header;
+    }
+
+    public void setTextSize(int textSize) {
+        this.textSize = textSize;
+    }
+
+    public void setTypeface(int typeface) {
+        this.typeface = typeface;
     }
 }

@@ -1,5 +1,6 @@
 package me.yaoandy107.example;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -75,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Set timetable
         studentCourse.setCourseList(courseInfoList);
+        courseTable.setTextSize(13);
+        courseTable.setTypeface(Typeface.BOLD);
         courseTable.setStudentCourse(studentCourse);
         courseTable.setTableInitializeListener(new CourseTableLayout.TableInitializeListener() {
             @Override
