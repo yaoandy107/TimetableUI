@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         // Add course1 - sample5
         CustomCourseInfo customCourseInfo4 = new CustomCourseInfo();
         customCourseInfo4.setName("Course 5");
-        customCourseInfo4.setCourseTime("7 8", "", "5 6", "1 2", "7 8", "", "");
+        customCourseInfo4.setCourseTime("7 8 16", "", "5 6", "1 2", "7 8", "", "");
         customCourseInfo4.setLoaction("Taichung");
         customCourseInfo4.setId("05");
         customCourseInfo4.setTeacher("OAO");
@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         studentCourse.setCourseList(courseInfoList);
         courseTable.setTextSize(13);
         courseTable.setTypeface(Typeface.BOLD);
+        courseTable.setAnimation(false);
         courseTable.setStudentCourse(studentCourse);
         courseTable.setTableInitializeListener(new CourseTableLayout.TableInitializeListener() {
             @Override
