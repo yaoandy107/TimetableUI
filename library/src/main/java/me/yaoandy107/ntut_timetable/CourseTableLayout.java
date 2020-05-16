@@ -215,8 +215,8 @@ public class CourseTableLayout extends LinearLayout {
             }
         }
         TABLE_ROWS++;
-        if (TABLE_ROWS <= 0)
-            TABLE_ROWS = 1;
+        if (TABLE_ROWS <= 1)
+            TABLE_ROWS = 2;
     }
 
     public void showCourse(StudentCourse studentCourse) {

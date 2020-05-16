@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         StudentCourse studentCourse = new StudentCourse();
         ArrayList<CourseInfo> courseInfoList = new ArrayList<>();
 
-        // Add course1 - sample1
+       /* // Add course1 - sample1
         CustomCourseInfo customCourseInfo = new CustomCourseInfo();
         customCourseInfo.setName("Course 1");
         customCourseInfo.setCourseTime("1 2", "", "2", "3", "4", "", "");
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         customCourseInfo4.setLoaction("Taichung");
         customCourseInfo4.setId("05");
         customCourseInfo4.setTeacher("OAO");
-        courseInfoList.add(customCourseInfo4);
+        courseInfoList.add(customCourseInfo4);*/
 
         // Set timetable
         studentCourse.setCourseList(courseInfoList);
