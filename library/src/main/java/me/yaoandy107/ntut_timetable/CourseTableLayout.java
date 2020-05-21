@@ -1,6 +1,7 @@
 package me.yaoandy107.ntut_timetable;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -18,7 +19,6 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import me.yaoandy107.ntut_timetable.model.CourseInfo;
 import me.yaoandy107.ntut_timetable.model.StudentCourse;
@@ -29,18 +29,24 @@ import me.yaoandy107.ntut_timetable.model.StudentCourse;
 
 public class CourseTableLayout extends LinearLayout {
     private static final int TABLE_COL = 9;
-    private static final int TABLE_ROW = 14;
+    private int TABLE_ROWS = 0;
     private boolean isInitialized = false;
-    private boolean isDisplayABCD = false;
     private boolean isDisplaySat = false;
     private boolean isDisplaySun = false;
     private boolean isDisplayNoTime = false;
+
     private int ROW_HEIGHT;
     private View.OnClickListener onClickListener = null;
     private TableInitializeListener initializeListener = null;
     private LinearLayout courseContainer;
     private StudentCourse studentCourse = new StudentCourse();
     private OnTouchListener onTouchListener;
+
+    private String[] header = new String[]{"一", "二", "三", "四", "五", "六", "日"};
+    private int textSize = 12;
+    private int typeface = Typeface.NORMAL;
+
+    private boolean animation = true;
 
     public CourseTableLayout(Context context) {
         super(context);
@@ -78,11 +84,11 @@ public class CourseTableLayout extends LinearLayout {
     }
 
     @Override
-    protected void onLayout(boolean changed, int left, int top, int right,
-                            int bottom) {
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         if (!isInitialized) {
             ROW_HEIGHT = Math.round((bottom - top) / 9.5f);
+            setTABLE_ROWS(studentCourse);
             initCourseTable();
             isInitialized = true;
             if (initializeListener != null) {
@@ -103,33 +109,27 @@ public class CourseTableLayout extends LinearLayout {
         this.onClickListener = onClickListener;
     }
 
-    public void setTableInitializeListener(
-            TableInitializeListener initializeListener) {
+    public void setTableInitializeListener(TableInitializeListener initializeListener) {
         this.initializeListener = initializeListener;
     }
 
     private void initCourseTable() {
         courseContainer.removeAllViews();
-        LayoutParams title_row_params = new LayoutParams(
-                LayoutParams.MATCH_PARENT, ROW_HEIGHT / 2);
-        LayoutParams row_params = new LayoutParams(LayoutParams.MATCH_PARENT,
-                ROW_HEIGHT);
-        LayoutParams cell_params = new LayoutParams(0,
-                LayoutParams.MATCH_PARENT, 1f);
-        LayoutParams title_col_params = new LayoutParams(0,
-                LayoutParams.MATCH_PARENT, 0.5f);
-        for (int i = 0; i < TABLE_ROW; i++) {
+        LayoutParams title_row_params = new LayoutParams(LayoutParams.MATCH_PARENT, ROW_HEIGHT / 2);
+        LayoutParams row_params = new LayoutParams(LayoutParams.MATCH_PARENT, ROW_HEIGHT);
+        LayoutParams cell_params = new LayoutParams(0, LayoutParams.MATCH_PARENT, 1f);
+        LayoutParams title_col_params = new LayoutParams(0, LayoutParams.MATCH_PARENT, 0.5f);
+
+        for (int i = 0; i < TABLE_ROWS; i++) {
             LinearLayout tableRow = new LinearLayout(getContext());
             tableRow.setOrientation(LinearLayout.HORIZONTAL);
             tableRow.setLayoutParams(i == 0 ? title_row_params : row_params);
             tableRow.setGravity(Gravity.CENTER);
-            tableRow.setBackgroundResource(i % 2 != 0 ? R.color.cloud
-                    : R.color.white);
+            tableRow.setBackgroundResource(i % 2 != 0 ? R.color.cloud : R.color.white);
             for (int j = 0; j < TABLE_COL; j++) {
                 CourseBlock tableCell = new CourseBlock(getContext());
                 if (j == 0 && i > 0) {
-                    tableCell.setText(Integer.toHexString(i).toUpperCase(
-                            Locale.US));
+                    tableCell.setText(i + "");
                 }
                 tableCell.setId(j != TABLE_COL - 1 ? i : 14);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -147,23 +147,23 @@ public class CourseTableLayout extends LinearLayout {
         }
         LinearLayout titleRow = (LinearLayout) courseContainer.getChildAt(0);
         CourseBlock text = (CourseBlock) titleRow.getChildAt(1);
-        text.setText("一");
+        text.setText(header[0]);
         text = (CourseBlock) titleRow.getChildAt(2);
-        text.setText("二");
+        text.setText(header[1]);
         text = (CourseBlock) titleRow.getChildAt(3);
-        text.setText("三");
+        text.setText(header[2]);
         text = (CourseBlock) titleRow.getChildAt(4);
-        text.setText("四");
+        text.setText(header[3]);
         text = (CourseBlock) titleRow.getChildAt(5);
-        text.setText("五");
+        text.setText(header[4]);
         text = (CourseBlock) titleRow.getChildAt(6);
-        text.setText("六");
+        text.setText(header[5]);
         text = (CourseBlock) titleRow.getChildAt(7);
-        text.setText("日");
+        text.setText(header[6]);
     }
 
     private void resetCourseTable() {
-        for (int i = 1; i < TABLE_ROW; i++) {
+        for (int i = 1; i < TABLE_ROWS; i++) {
             for (int j = 1; j < TABLE_COL; j++) {
                 LinearLayout tableRow = (LinearLayout) courseContainer.getChildAt(i);
                 if (tableRow != null) {
@@ -172,7 +172,6 @@ public class CourseTableLayout extends LinearLayout {
                 }
             }
         }
-        isDisplayABCD = false;
         isDisplaySat = false;
         isDisplaySun = false;
         isDisplayNoTime = false;
@@ -180,29 +179,50 @@ public class CourseTableLayout extends LinearLayout {
     }
 
     private void controlColRowShow() {
-        for (int i = 0; i < TABLE_ROW; i++) {
-            LinearLayout tableRow = (LinearLayout) courseContainer
-                    .getChildAt(i);
+        for (int i = 0; i < TABLE_ROWS; i++) {
+            LinearLayout tableRow = (LinearLayout) courseContainer.getChildAt(i);
+            if (tableRow != null) {
+                tableRow.setVisibility(View.GONE);
+            }
+        }
+
+        for (int i = 0; i < TABLE_ROWS; i++) {
+            LinearLayout tableRow = (LinearLayout) courseContainer.getChildAt(i);
             if (tableRow != null) {
                 CourseBlock satText = (CourseBlock) tableRow.getChildAt(6);
                 satText.setVisibility(isDisplaySat ? View.VISIBLE : View.GONE);
                 CourseBlock sunText = (CourseBlock) tableRow.getChildAt(7);
                 sunText.setVisibility(isDisplaySun ? View.VISIBLE : View.GONE);
                 CourseBlock noTimeText = (CourseBlock) tableRow.getChildAt(8);
-                noTimeText.setVisibility(isDisplayNoTime ? View.INVISIBLE
-                        : View.GONE);
-                if (i > 9) {
-                    tableRow.setVisibility(isDisplayABCD ? View.VISIBLE
-                            : View.GONE);
+                noTimeText.setVisibility(isDisplayNoTime ? View.INVISIBLE : View.GONE);
+                tableRow.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    private void setTABLE_ROWS(StudentCourse studentCourse) {
+        for (CourseInfo item : studentCourse.getCourseList()) {
+            for (int i = 0; i < 7; i++) {
+                String time = item.getTimes()[i];
+                ArrayList<String> s = splitTime(time);
+                for (String t : s) {
+                    if (t.length() != 0) {
+                        int row = Integer.parseInt(t);
+                        if (row > TABLE_ROWS)
+                            TABLE_ROWS = row;
+                    }
                 }
             }
         }
+        TABLE_ROWS++;
+        if (TABLE_ROWS <= 1)
+            TABLE_ROWS = 2;
     }
 
     public void showCourse(StudentCourse studentCourse) {
         resetCourseTable();
         int color_index = 0;
-        int[] color_array = getColorArray(studentCourse.getCourseList().size());
+        int[] color_array = getColorArray(studentCourse.getCourseList());
         int count = 0;
         for (CourseInfo item : studentCourse.getCourseList()) {
             boolean isHaveTime = false;
@@ -213,7 +233,6 @@ public class CourseTableLayout extends LinearLayout {
                     if (t.length() != 0) {
                         int row = Integer.parseInt(t);
                         int col = i + 1;
-                        isDisplayABCD = isDisplayABCD || row > 9;
                         isDisplaySun = isDisplaySun || i == 6;
                         isDisplaySat = isDisplaySat || i == 5;
                         setTableCell(row, col, color_array[color_index], item);
@@ -235,18 +254,31 @@ public class CourseTableLayout extends LinearLayout {
         this.studentCourse = studentCourse;
     }
 
-    private int[] getColorArray(int color_count) {
-        int[] colorArray = new int[color_count];
+    private int[] getColorArray(List<CourseInfo> courses) {
+        ArrayList<Integer> colors = new ArrayList<>();
+
         int[] ints = getContext().getResources().getIntArray(R.array.course_table);
-        List<Integer> defaoultColor = new ArrayList<>();
+        List<Integer> defaultColor = new ArrayList<>();
         for (int i : ints) {
-            defaoultColor.add(i);
+            defaultColor.add(i);
         }
-        for (int i = 0; i < color_count; i++) {
-            int random = (int) (Math.random() * defaoultColor.size());
-            colorArray[i] = defaoultColor.remove(random);
+
+        for (int i = 0; i < courses.size(); i++) {
+            if (courses.get(i).getColor() == null) {
+                int random = (int) (Math.random() * defaultColor.size());
+                colors.add(defaultColor.get(random));
+                defaultColor.remove(random);
+            } else {
+                colors.add(courses.get(i).getColor());
+            }
         }
-        return colorArray;
+
+        int[] colorsArray = new int[colors.size()];
+        for (int i = 0; i < colors.size(); i++) {
+            colorsArray[i] = colors.get(i);
+        }
+
+        return colorsArray;
     }
 
     private void setTableCell(int row, int col, int color, CourseInfo course) {
@@ -257,16 +289,20 @@ public class CourseTableLayout extends LinearLayout {
             table_cell.setVisibility(View.INVISIBLE);
             table_cell.setText(course.getName().trim());
             table_cell.setTag(course);
+            table_cell.setTextSize(textSize);
+            table_cell.setTypeface(table_cell.getTypeface(), typeface);
             table_cell.setBackgroundColor(color);
             table_cell.setOnClickListener(onClickListener);
-            setAnimation(table_cell);
+            if (animation)
+                setAnimation(table_cell);
+            else
+                table_cell.setVisibility(View.VISIBLE);
         }
     }
 
     private void setAnimation(final CourseBlock textview) {
         DisplayMetrics displaymetrics = new DisplayMetrics();
-        WindowManager windowManager = (WindowManager) getContext()
-                .getSystemService(Context.WINDOW_SERVICE);
+        WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
         if (windowManager != null) {
             windowManager.getDefaultDisplay().getMetrics(displaymetrics);
         }
@@ -313,5 +349,22 @@ public class CourseTableLayout extends LinearLayout {
 
     public interface TableInitializeListener {
         void onTableInitialized(CourseTableLayout course_table);
+    }
+
+    public void setHeader(String... header) {
+        if (header.length == 7)
+            this.header = header;
+    }
+
+    public void setTextSize(int textSize) {
+        this.textSize = textSize;
+    }
+
+    public void setTypeface(int typeface) {
+        this.typeface = typeface;
+    }
+
+    public void setAnimation(boolean value) {
+        animation = value;
     }
 }

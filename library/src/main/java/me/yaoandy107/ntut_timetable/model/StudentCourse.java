@@ -16,6 +16,4 @@ public class StudentCourse {
     public void setCourseList(ArrayList<CourseInfo> courseList) {
         this.courseList = courseList;
     }
-
-
 }

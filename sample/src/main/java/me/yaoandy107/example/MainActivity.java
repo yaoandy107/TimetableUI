@@ -1,5 +1,6 @@
 package me.yaoandy107.example;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         // Add course1 - sample2
         CustomCourseInfo customCourseInfo1 = new CustomCourseInfo();
         customCourseInfo1.setName("Course 2");
-        customCourseInfo1.setCourseTime(new String[]{"4", "5", "3", "6 7 8", "", "", ""});
+        customCourseInfo1.setCourseTime(new String[]{"4", "5", "3", "6 7 9", "", "", ""});
         customCourseInfo1.setLoaction("Taiwan");
         customCourseInfo1.setId("02");
         customCourseInfo1.setTeacher("OωO");
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         // Add course1 - sample5
         CustomCourseInfo customCourseInfo4 = new CustomCourseInfo();
         customCourseInfo4.setName("Course 5");
-        customCourseInfo4.setCourseTime("7 8", "", "5 6", "1 2", "7 8", "", "");
+        customCourseInfo4.setCourseTime("7 8 16", "", "5 6", "1 2", "7 8", "", "");
         customCourseInfo4.setLoaction("Taichung");
         customCourseInfo4.setId("05");
         customCourseInfo4.setTeacher("OAO");
@@ -75,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Set timetable
         studentCourse.setCourseList(courseInfoList);
+        courseTable.setTextSize(13);
+        courseTable.setTypeface(Typeface.BOLD);
+        courseTable.setAnimation(false);
         courseTable.setStudentCourse(studentCourse);
         courseTable.setTableInitializeListener(new CourseTableLayout.TableInitializeListener() {
             @Override
